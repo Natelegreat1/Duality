@@ -12,8 +12,6 @@ public class GravityBody : MonoBehaviour {
     	rigidbody.useGravity = false;
 	}
 
-	// obviously this is crude since we might want to be able to stand on (and jump off) random objects
-	// should probably filter based on tag in future
 	void OnCollisionEnter (Collision c) {
     	if (c.gameObject.tag == "Terrain"){
         	grounded++;
