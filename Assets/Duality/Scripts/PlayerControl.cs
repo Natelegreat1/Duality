@@ -10,6 +10,7 @@ public class PlayerControl : MonoBehaviour {
 	public float maxSpeed = 10.0f;
 	public float jumpForce = 50.0f;
 	private GravityBody gbody;
+	public bool isJumping;
  
 	void Awake () {
 	    rigidbody.freezeRotation = true;
@@ -22,12 +23,13 @@ public class PlayerControl : MonoBehaviour {
 	        Vector3 targetVelocity = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 	        targetVelocity = transform.TransformDirection(targetVelocity);
 	        targetVelocity *= speed;
-			if (rigidbody.velocity.x < maxSpeed && rigidbody.velocity.y < maxSpeed && rigidbody.velocity.z < maxSpeed) {
+			if (rigidbody.velocity.x < maxSpeed && rigidbody.velocity.y < maxSpeed && rigidbody.velocity.z < maxSpeed && !isJumping) {
 				rigidbody.AddForce(targetVelocity);
 			}
 			// Handle jumping
 			if (gbody.grounded > 0 && Input.GetButton("Jump")) {
 				rigidbody.AddRelativeForce(0,jumpForce,0);
+				isJumping = true;
 			}
 	}
 }

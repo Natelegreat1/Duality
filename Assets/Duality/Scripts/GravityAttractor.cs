@@ -6,7 +6,7 @@ public class GravityAttractor : MonoBehaviour {
 	// Set to true for mono-directional gravity
 	bool useLocalUpVector = false;
 	// Force applied along gravity up-vector (negative = down)
-	float fauxGravity = -10.0f;
+	public float gravity = -10.0f;
 	
 	public void Attract (GravityBody body) {
     	Vector3 gravityUp;
@@ -25,12 +25,12 @@ public class GravityAttractor : MonoBehaviour {
     	}
 
     	// Accelerate the body along its up vector
-    	r.AddForce(gravityUp * fauxGravity * r.mass);
+    	r.AddForce(gravityUp * gravity * r.mass);
     	if (body.grounded == 1) {
-			r.drag = 0.1f;
+			r.drag = 0.8f;
 		}
 
-    	// If the object's freezerotation is set, we force the object upright
+    	// Force object upright
     	if (r.freezeRotation) {
         	// Orient relative to gravity
         	localUp = t.up;
